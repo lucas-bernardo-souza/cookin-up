@@ -14,12 +14,34 @@ export default {
             <span class="subtitulo-lg sua-lista-texto">
                 Sua lista:
             </span>
-            <ul class="ingredientes-sua-lista">
-                <li v-for="ingrediente in ingredientes" class="ingrediente">
+            <!--
+              A diretiva v-if é um condicional que se for avaliada como verdadeira o Vue irá renderizar o componente
+              Caso a condição seja avaliada como falsa o Vue não renderizará o componente.
+            -->
+
+            <ul v-if="ingredientes.length" class="ingredientes-sua-lista">
+              <!--
+                Aqui está sendo realizado uma renderização dinâmica dos elementos dessa lista
+                Para isso foi utilizado a diretiva v-for
+                E é necessário um identificador único para cada componente
+                Por meio da diretiva v-bind é possível usar a variavel js como atributo da tag key do html
+                Com isso, foi passado o próprio valor da variável ingrediente como id único
+
+                É possível omitir a diretiva v-bind e utilizar apenas os dois pontos :
+              -->
+                <li v-for="ingrediente in ingredientes" v-bind:key="ingrediente" class="ingrediente">
                     {{ ingrediente }}
                 </li>
                 
             </ul>
+            <!--
+              A diretiva v-else deve ser posicionada logo após um elemento que contenha e diretiva v-if
+              E assim como na programação se um for renderizado o outro não será e visse versa
+            -->
+            <p v-else class="paragrafo lista-vazia">
+              <img src="../assets/images/icones/lista-vazia.svg" alt="Ícone de pesquisa">
+              Sua lista está vazia, selecione ingredientes para iniciar.
+            </p>
         </section>
     </main>
 </template>
